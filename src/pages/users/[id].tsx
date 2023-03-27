@@ -6,10 +6,12 @@ import { z } from "zod"
 
 import { Responses } from "@/components/app/responses"
 import { AppLayout } from "@/components/layout"
+import { useUploadAvatarModal } from "@/components/modals/upload-avatar"
 import { FullScreenLoader } from "@/components/ui"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 
 const Profile: NextPage = () => {
+  const { UploadAvatarModal } = useUploadAvatarModal()
   const router = useRouter()
   const { data, status } = api.user.getById.useQuery(
     {
@@ -48,26 +50,35 @@ const Profile: NextPage = () => {
       )}
       {status === "success" && (
         <>
-          <div className="z-30 flex h-36 w-full items-center border-b border-gray-300">
-            <div className="flex w-full items-center">
-              <div className="group mt-20 h-44 w-36">
-                {data.user.image ? (
-                  <AspectRatio ratio={16 / 9}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={data.user.image}
-                      className="rounded-full object-cover group-hover:opacity-75"
-                      alt=""
+          <div className="z-30 flex h-44 w-full items-center border-b border-gray-300">
+            <div className="flex w-full items-center space-x-2">
+              <div className="h-36 w-36 items-center">
+                {data.avatar?.GET ? (
+                  <Avatar>
+                    <AvatarImage
+                      src={data.avatar.GET}
                       referrerPolicy="no-referrer"
+                      className="h-auto w-full"
                     />
-                  </AspectRatio>
+                  </Avatar>
+                ) : data.user.image ? (
+                  <Avatar>
+                    <AvatarImage
+                      src={data.user.image}
+                      referrerPolicy="no-referrer"
+                      className="h-auto w-full"
+                    />
+                  </Avatar>
                 ) : (
-                  <User className="h-24 w-auto" />
+                  <User className="h-36 w-auto" />
                 )}
               </div>
-              <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 dark:border-b-slate-700">
-                {data.user.name}
-              </h2>
+              <div className="flex flex-col space-y-1">
+                <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 dark:border-b-slate-700">
+                  {data.user.name}
+                </h2>
+                {data.isCurrentUser && <UploadAvatarModal />}
+              </div>
             </div>
           </div>
 

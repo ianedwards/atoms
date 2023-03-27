@@ -61,11 +61,20 @@ export const Users = () => {
             </div>
             <li className="relative flex items-center justify-between">
               <div className="relative flex shrink items-center space-x-2 sm:space-x-4">
-                {user.image ? (
+                {user.avatar?.GET ? (
+                  <Avatar>
+                    <AvatarImage
+                      src={user.avatar.GET}
+                      referrerPolicy="no-referrer"
+                      className="h-10 w-10"
+                    />
+                  </Avatar>
+                ) : user.image ? (
                   <Avatar>
                     <AvatarImage
                       src={user.image}
                       referrerPolicy="no-referrer"
+                      className="h-10 w-10"
                     />
                   </Avatar>
                 ) : (

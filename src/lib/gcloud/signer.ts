@@ -3,7 +3,7 @@ import { env } from "@/env.mjs"
 import { storage } from "./gcs"
 
 const BUCKET = env.PROVISIONED_BUCKET_NAME
-const DAY_IN_SECONDS = 86400
+const DAY_IN_SECONDS = 864000
 
 export const getPresignedUrls = async ({
   key,

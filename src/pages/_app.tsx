@@ -5,16 +5,7 @@ import { type Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
 
 import "@/styles/globals.css"
-import { NextComponentType, NextPageContext } from "next"
 import { ThemeProvider } from "next-themes"
-
-import { AuthStateProvider } from "@/lib/auth/context"
-
-type AppAuthProps = AppProps & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
-  Component: NextComponentType<NextPageContext, any, {}> &
-    Partial<{ auth: boolean }>
-}
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,7 +16,7 @@ const fontSans = FontSans({
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
-}: AppAuthProps) => {
+}: AppProps) => {
   return (
     <>
       <style jsx global>{`
@@ -35,13 +26,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 			}`}</style>
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
         <SessionProvider session={session}>
-          {Component.auth ? (
-            <AuthStateProvider>
-              <Component {...pageProps} />
-            </AuthStateProvider>
-          ) : (
-            <Component {...pageProps} />
-          )}
+          <Component {...pageProps} />
         </SessionProvider>
       </ThemeProvider>
     </>
