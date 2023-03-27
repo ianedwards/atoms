@@ -2,6 +2,7 @@ import { useCallback, useState } from "react"
 import { api } from "@/utils/api"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PlusCircle } from "lucide-react"
+import { useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -31,6 +32,8 @@ const AnswerQuestions = ({
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
 }) => {
+  const { data } = useSession()
+  const utils = api.useContext()
   const {
     register,
     handleSubmit,
@@ -48,7 +51,13 @@ const AnswerQuestions = ({
     enabled: false,
     refetchOnWindowFocus: false,
   })
-  const addResponses = api.response.create.useMutation()
+  const addResponses = api.response.create.useMutation({
+    async onSuccess() {
+      if (data) {
+        await utils.user.getById.invalidate({ id: data.user.id })
+      }
+    },
+  })
 
   const onSubmit = handleSubmit(async (data) => {
     const responsePairs = data.answers

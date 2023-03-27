@@ -8,7 +8,9 @@ import { Spinner } from "../ui"
 import { Avatar, AvatarImage } from "../ui/avatar"
 
 export const Users = () => {
-  const { data, status } = api.user.list.useQuery()
+  const { data, status } = api.user.list.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   if (status === "loading") {
     return (
