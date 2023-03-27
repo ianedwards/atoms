@@ -1,5 +1,6 @@
 import { createTRPCRouter } from "@/server/api/trpc"
 
+import { responseRouter } from "./routers/response"
 import { userRouter } from "./routers/user"
 
 /**
@@ -9,6 +10,7 @@ import { userRouter } from "./routers/user"
  */
 export const appRouter = createTRPCRouter({
   user: userRouter,
+  response: responseRouter,
 })
 
 // export type definition of API

@@ -10,7 +10,7 @@ export const AppLayout = ({
   children: React.ReactNode
 }) => {
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full px-1.5 sm:px-0">
       <div className="container z-30 border-b border-gray-300 dark:border-slate-700">
         <div className="mx-auto">
           <div className="flex h-16 items-center justify-between">

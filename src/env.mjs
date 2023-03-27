@@ -20,6 +20,11 @@ const server = z.object({
   ),
   GOOGLE_CLIENT_ID: z.string().min(1),
   GOOGLE_CLIENT_SECRET: z.string().min(1),
+  OPENAI_API_KEY: z.string().min(1),
+  GCP_PROJECT_ID: z.string().min(1),
+  GCP_CLIENT_EMAIL: z.string().min(1),
+  GCP_PRIVATE_KEY: z.string().min(1),
+  PROVISIONED_BUCKET_NAME: z.string().min(1),
 })
 
 /**
@@ -43,6 +48,11 @@ const processEnv = {
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  GCP_PROJECT_ID: process.env.GCP_PROJECT_ID,
+  GCP_CLIENT_EMAIL: process.env.GCP_CLIENT_EMAIL,
+  GCP_PRIVATE_KEY: process.env.GCP_PRIVATE_KEY,
+  PROVISIONED_BUCKET_NAME: process.env.PROVISIONED_BUCKET_NAME,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 }
 
