@@ -22,12 +22,12 @@ A social site with auto generated questions from OpenAI
 
 #### Technical
 
-[] Unit tests
-[] Review error handling & messaging
+- [ ] Unit tests
+- [ ] Review error handling & messaging
 
 #### Product
 
-[] "Reroll" generated questions to get a new set of options
-[] Improve randomness of generated questions
-[] Add additional responses and edit existing
-[] React and comment on responses
+- [ ] "Reroll" generated questions to get a new set of options
+- [ ] Improve randomness of generated questions
+- [ ] Add additional responses and edit existing
+- [ ] React and comment on responses
